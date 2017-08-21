@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="904"
+   name=""
+   committed-date="2007-01-11T01:56:30.147528Z"
+   url="http://i4k022.nhncorp.com:10080/svn/uiapp/trunk/webapps/module/Template_/tpl_plugin"
+   last-author="foreblue"
+   kind="dir"
+   uuid="621ecf51-a269-4981-b92c-03cd6582ba36"
+   repos="http://i4k022.nhncorp.com:10080/svn/uiapp"
+   revision="2928"/>
+<entry
+   committed-rev="904"
+   name="functions.safe_mode.ini"
+   text-time="2006-09-25T08:27:24.437500Z"
+   committed-date="2007-01-11T01:56:30.147528Z"
+   checksum="bcbc97538f21ab54607dd03d357d114c"
+   last-author="foreblue"
+   kind="file"
+   prop-time="2007-01-11T02:01:22.343750Z"/>
+<entry
+   committed-rev="904"
+   name="object.say.php"
+   text-time="2006-09-25T08:27:24.453125Z"
+   committed-date="2007-01-11T01:56:30.147528Z"
+   checksum="9a4102e389852ea19a163a59535510ee"
+   last-author="foreblue"
+   kind="file"
+   prop-time="2007-01-11T02:01:22.359375Z"/>
+<entry
+   committed-rev="904"
+   name="prefilter.adjustPath.php"
+   text-time="2006-09-25T08:27:24.453125Z"
+   committed-date="2007-01-11T01:56:30.147528Z"
+   checksum="d65d5068fd7f2f5539dd869535d88bb5"
+   last-author="foreblue"
+   kind="file"
+   prop-time="2007-01-11T02:01:22.359375Z"/>
+<entry
+   committed-rev="904"
+   name="prefilter.parseMySyntax.php"
+   text-time="2006-09-25T08:27:24.453125Z"
+   committed-date="2007-01-11T01:56:30.147528Z"
+   checksum="5b1f226f073ce4d292c04d563dd2683f"
+   last-author="foreblue"
+   kind="file"
+   prop-time="2007-01-11T02:01:22.359375Z"/>
+<entry
+   committed-rev="904"
+   name="postfilter.removeTmpCode.php"
+   text-time="2006-09-25T08:27:24.453125Z"
+   committed-date="2007-01-11T01:56:30.147528Z"
+   checksum="d3537bc67ad24733f9fab898622a27a8"
+   last-author="foreblue"
+   kind="file"
+   prop-time="2007-01-11T02:01:22.375000Z"/>
+<entry
+   committed-rev="904"
+   name="postfilter.arrangeSpace.php"
+   text-time="2006-09-25T08:27:24.468750Z"
+   committed-date="2007-01-11T01:56:30.147528Z"
+   checksum="fb3ddd92289f2becc7fb91f5ba7715fb"
+   last-author="foreblue"
+   kind="file"
+   prop-time="2007-01-11T02:01:22.375000Z"/>
+<entry
+   committed-rev="904"
+   name="function.returnHello.php"
+   text-time="2006-09-25T08:27:24.468750Z"
+   committed-date="2007-01-11T01:56:30.147528Z"
+   checksum="e4b08bbdbc44829c3dc4c3ab7992a8fc"
+   last-author="foreblue"
+   kind="file"
+   prop-time="2007-01-11T02:01:22.390625Z"/>
+</wc-entries>

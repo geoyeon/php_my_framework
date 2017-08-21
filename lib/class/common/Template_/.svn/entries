@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="2456"
+   name=""
+   committed-date="2007-02-27T19:37:15.817907Z"
+   url="http://i4k022.nhncorp.com:10080/svn/uiapp/trunk/webapps/module/Template_"
+   last-author="bizais"
+   kind="dir"
+   uuid="621ecf51-a269-4981-b92c-03cd6582ba36"
+   repos="http://i4k022.nhncorp.com:10080/svn/uiapp"
+   revision="2928"/>
+<entry
+   committed-rev="2456"
+   name="Template_.class.php"
+   text-time="2007-03-19T01:58:44.530875Z"
+   committed-date="2007-02-27T19:37:15.817907Z"
+   checksum="b79e5f027d732d46be309b7f6952406d"
+   last-author="bizais"
+   kind="file"
+   prop-time="2007-03-19T01:58:44.499625Z"/>
+<entry
+   committed-rev="904"
+   name="Template_.compiler.php"
+   text-time="2006-11-03T01:35:26.343750Z"
+   committed-date="2007-01-11T01:56:30.147528Z"
+   checksum="e7e3915035a3b7823c3d147edeee2dd3"
+   last-author="foreblue"
+   kind="file"
+   prop-time="2007-01-11T02:01:22.328125Z"/>
+<entry
+   name="tpl_plugin"
+   kind="dir"/>
+</wc-entries>

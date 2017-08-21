@@ -1,0 +1,108 @@
+<?php
+	define("LANG","kr");
+
+    define("DELIMETER",":");
+
+	define("LOG_DIR","/game/public_html/log/");
+	define("DATA_ENCRYPT_KEY","LEVIATHAN");
+	
+	define("MODE","TEST");
+
+	// 게임설정
+	define("GOOGLE_GAME_INDEX",2554);
+	define("TSTORE_GAME_INDEX",2521);
+
+	// 카드 소환
+	define("FREE_CARD_TOTAL_PCT",9960);
+	define("MONEY_CARD_TOTAL_PCT",9955);
+
+	//레벨업 포인트
+	define("LEVELUP_POINT",4);
+
+	//최대 레벨
+	define("MAX_LEVEL",60);
+
+	//define("MONEY_CARD_TOTAL_PCT",118233);
+	define("MAX_SKILL_LEVEL",10);
+
+	//리프레시 시간
+
+	define("AP_DELAY",180);
+	define("BP_DELAY",180);
+
+	//등장 확율
+	define("BIGMON_ENC_PCT",15);
+	define("RAREMON_ENC_PCT",15);
+	define("FRIEND_ENC_PCT",35);
+
+	//젬 드랍율
+	define("GEM_DROP_PCT",10);
+
+	//대결 기간
+	define("BATTLE_TERM",14);
+
+
+	define("NORMAL_MON_RATE",25);
+	
+	// DB_LEVIATHAN_HS_W :  핸들러 소켓
+	$db_conn = array(
+		"DB_LEVIATHAN"=>array("DB_HOST"=>"172.27.9.241","DB_USER"=>"beatrain_user","DB_PASS"=>"fRp8aId^ls)","DB_NAME"=>"SOULSTONE","DB_CHAR"=>"SET NAMES utf8","DB_PORT"=>"10315"),
+		"DB_LEVIATHAN_REDIS"=>array("DB_HOST"=>"172.27.232.129","DB_PORT"=>6379,"DB_NAME"=>"DB_LEVIATHAN_REDIS"),
+		"DB_LEVIATHAN_LOG"=>array("DB_HOST"=>"172.27.9.241","DB_USER"=>"soul_log_user","DB_PASS"=>"f!h1thDnr4m~","DB_NAME"=>"SOULSTONE_LOG","DB_CHAR"=>"SET NAMES utf8","DB_PORT"=>"10315"),
+		"test"=>array("DB_HOST"=>"localhost","DB_USER"=>"leviathan","DB_PASS"=>"qkgkanxm)(*&","DB_NAME"=>"test","DB_CHAR"=>"SET NAMES utf8","DB_PORT"=>"3306")
+	);
+	
+	
+		
+	// 카드 스킬 발동 확률
+	$skill_percent = array(
+		70,50,40,20,20
+	);
+
+	// 공훈점수
+	$battle_merit_m = array(
+		"-4"=>"0.1","-3"=>"0.2","-2"=>"0.5","-1"=>"0.8","0"=>"1.0","1"=>"1.2","2"=>"1.5","3"=>"2.0"
+	);
+
+
+	// 스킬 강화 중 효과
+	$skill_effect = array(
+		"1"=>"2","2"=>"5","3"=>"8","4"=>"10","5"=>"13","6"=>"15","7"=>"18","8"=>"20","9"=>"25"
+	);
+
+
+	// PVP 리그 
+	$battle_inning = 1;
+
+
+
+	// 던전 반복 보상
+	$dg_clear_reward = array(
+		"1011"=>"1", "1021"=>"4","1031"=>"7"
+	);
+
+	//월드 보너스
+	$world_bonus = array(0,10,10,10);
+
+
+	// 몬스터
+	/*
+	$mon_level = array(
+		"big"=>array(10,26)
+	);
+	
+	$mon_material = array(
+		"big"=>array(2)
+	);
+	*/
+
+
+	/*
+	// 희귀몬
+	$rare_monster = array(
+		"raremon_hp"=>"300000+(lv+1)*80000","raremon_character"=>"데빌메이커","raremon_reward"=>"10302,10304,20303,20304,30304,30408"
+	);
+	*/
+
+
+?>

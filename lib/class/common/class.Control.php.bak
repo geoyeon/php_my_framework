@@ -1,0 +1,237 @@
+<?php
+class Control
+{
+	protected $result = array("retv"=>true);
+	protected $isPrintResult = true;
+	protected $isJSON = true;
+	protected $isXML = false;
+	protected $user_seq;
+	protected $device_key;
+
+	protected $except = array("createUser"=>1,"login"=>1,"reauthByDevice"=>1,"Handler_two_key"=>1,"makeBasicXML"=>1,"test"=>1,"changeDevice"=>1,"changeDeviceComplete"=>1);
+	protected $param = array();
+	protected $req = array();
+
+	function __construct($req=array())
+	{
+		$this->req = $req;
+		$this->getParameter();
+
+		$this->_setPlayer($this->getParam("user_seq"));
+		$this->_setDeviceKey($this->getParam("device_key"));
+
+		$fb = FB::getInstance();
+		$fb->connect("DB_MURIM_REDIS");
+		$userActionInfo = $fb->get("action_".$this->_getPlayer());
+
+		if(empty($useActionInfo))
+		{
+			$userActionInfo = array("time"=>time(),"isComplete"=>0);
+		}
+		else
+		{
+			if($userActionInfo["isComplete"] == 0 && $userActionInfo["time"] < (time() - 5))
+			{
+				Util::sendError("WRONG_ACCESS");
+			}
+			else
+			{
+				$userActionInfo = array("time"=>time(),"isComplete"=>0);
+			}
+		}
+
+		$fb->set("action_".$this->_getPlayer(),$userActionInfo);
+		//$this->_sqlConn();
+	}
+
+	function __destruct()
+	{
+		$this->chkError();
+
+		if($this->isJSON)
+		{
+			//header("Content-Type: application/json");
+			$output = json_encode($this->result);
+
+			if(MODE == "RELEASE")
+			{
+				$output = Util::output_encrypt($output);
+			}
+
+			echo $output;
+		}
+		elseif($this->isXML)
+		{
+			header("Content-Type: text/xml; charset=UTF-8");
+		}
+
+		$userActionInfo = array("time"=>time(),"isComplete"=>1);
+
+		$fb = FB::getInstance();
+		$fb->connect("DB_MURIM_REDIS");
+		$fb->set("action_".$this->_getPlayer(),$userActionInfo);
+	}
+
+	function getParameter()
+	{
+		$pr = trim($_REQUEST["param"]);
+
+		if(MODE == "RELEASE")
+		{
+			$pr = Util::input_decrypt($pr);
+		}
+
+		$this->param = json_decode($pr,true);
+
+		if(!array_key_exists($this->req[1],$this->except))
+		{
+			if($this->param["user_seq"] == "" || $this->param["device_key"] == "")
+			{
+				Util::sendError("WRONG_ACCESS");
+			}
+		}
+	}
+
+	function getParam($key="",$default=null)
+	{
+		if($key == "")
+		{
+			return "";
+		}
+
+		$value = Util::av($this->param,$key);
+
+		if(trim($value) == "" && $default != null)
+		{
+			return $default;
+		}
+		else
+		{
+			return trim($value);
+		}
+	}
+
+	function chkError()
+	{
+		if(Util::getSession("error"))
+		{
+			$m_error = MurimModelLoader::getModel("m_error",Util::getSession("error"));
+			
+			$this->result = array("retv"=>false,"errorCD"=>Util::getSession("error"),"errorMsg"=>$m_error[LANG]);
+		}
+
+		Util::setSession("error",null);
+	}
+
+
+	/**
+	 *  @ 나의 게임 정보 가져오기
+	 *  @ _setPlayer( 유저키 )
+	 */
+	function _setPlayer( $uSeq ) {
+		$this->user_seq = $uSeq;
+	} // end of _setPlayer
+
+	/**
+	 *  @ 나의 게임 정보 가져오기
+	 *  @ _setPlayerName( 유저명 )
+	 */
+	function _setDeviceKey( $uName ) {
+		$this->device_key = $uName;
+	} // end of _setPlayerName
+
+	/**
+	 *  @ 나의 게임 정보 가져오기
+	 *  @ _getPlayer() return 유저키
+	 */
+	function _getPlayer() {
+		return $this->user_seq;
+	} // end of _getPlayer
+
+	/**
+	 *  @ 나의 게임 정보 가져오기
+	 *  @ _getPlayerName() return 유저이름
+	 */
+	function _getDeviceKey() {
+		return $this->device_key;
+	} // end of _getPlayerName
+    
+    /**
+	*	Template_용 template 파일 디렉토리 setter
+	*
+	*	@param string template 파일 디렉토리
+	*/
+	public function set_template_dir( $template_dir )
+	{
+		$this->tpl->template_dir_arr = array($template_dir);
+	}
+
+	/**
+	*	Template_용 template compile 디렉토리 setter
+	*
+	*	@param string template compile 디렉토리
+	*/
+	public function set_compile_dir( $compile_dir )
+	{
+		$this->tpl->compile_dir = $compile_dir;
+	}
+
+	/**
+	*	template에 사용될 html 파일을 지정하는 method
+	*
+	*	@param string $id template 아이디
+	*	@param string $file template에 사용된 html 파일이름
+	*/
+	public function view_define( $id, $file )
+	{
+		$this->tpl->define( array( $id => $file ) );
+	}
+
+	/**
+	*	template에 교체될 문자열을 지정하는 method
+	*
+	*	@param string $key 문자열 아이디
+	*	@param string $value 교체될 문자열 값
+	*/
+	public function view_assign( $key, $value )
+	{
+		$this->tpl->assign( array( $key => $value ) );
+	}
+
+	/**
+	*	template을 적용하여 화면에 표시될 html로 만들고 print
+	*
+	*	@param string $fid 메인 template 아이디
+	*/
+	public function view_print( $fid )
+	{
+		$this->tpl->print_( $fid );
+	}
+
+	public function setResult( $retv = true,$data,$errMsg="")
+	{
+		if(array_key_exists("user_info",$data))
+		{
+			$uLogic = MurimUserLogic::getInstance();
+			$data["user_info"] = $uLogic->setChargeTime($data["user_info"]);
+			$data["level_info"] = MurimModelLoader::getModel("m_level",$data["user_info"]["char_level"]);
+			
+			if(substr($data["user_info"]["get_beststone_date"],0,10) == date("Y-m-d",time()))
+			{
+				$data["user_info"]["get_beststone"] = true;
+			}
+			else
+			{
+				$data["user_info"]["get_beststone"] = false;
+			}
+		}
+
+		$this->result["data"] = $data;
+
+		if(!$retv)
+		{
+			$this->result["errMsg"] = $errMsg;
+		}
+	}
+}
+?>
